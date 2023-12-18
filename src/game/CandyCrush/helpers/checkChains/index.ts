@@ -1,131 +1,180 @@
-import { universalCheck } from "./universalCheck";
-import { TTile } from "../createBoard";
+import { universalCheckCombination } from "./universalCheckCombination";
+import { checkEmptyBellow as checkEmptyBellowFunction } from "./checkEmptyBellow";
+import { TTile } from "../../types";
 
 class CheckForChains {
   colorArrangement: TTile[];
+  allTheCandiesFell: boolean;
 
   constructor(colorArrangement: TTile[]) {
     this.colorArrangement = colorArrangement;
+    this.allTheCandiesFell = true;
   }
 
   checkForColumnOfFive() {
-    this.colorArrangement = universalCheck(this.colorArrangement, [
-      [1],
-      [1],
-      [1],
-      [1],
-      [1],
-    ]);
+    if (this.allTheCandiesFell) {
+      this.colorArrangement = universalCheckCombination(this.colorArrangement, [
+        [1],
+        [1],
+        [1],
+        [1],
+        [1],
+      ]);
+    }
     return this;
   }
+
   checkForColumnOfFour() {
-    this.colorArrangement = universalCheck(this.colorArrangement, [
-      [1],
-      [1],
-      [1],
-      [1],
-    ]);
+    if (this.allTheCandiesFell) {
+      this.colorArrangement = universalCheckCombination(this.colorArrangement, [
+        [1],
+        [1],
+        [1],
+        [1],
+      ]);
+    }
     return this;
   }
 
   checkForColumnOfThree() {
-    this.colorArrangement = universalCheck(this.colorArrangement, [
-      [1],
-      [1],
-      [1],
-    ]);
+    if (this.allTheCandiesFell) {
+      this.colorArrangement = universalCheckCombination(this.colorArrangement, [
+        [1],
+        [1],
+        [1],
+      ]);
+    }
     return this;
   }
   checkForRowOfFive() {
-    this.colorArrangement = universalCheck(
-      this.colorArrangement,
-      [1, 1, 1, 1, 1]
-    );
+    if (this.allTheCandiesFell) {
+      this.colorArrangement = universalCheckCombination(
+        this.colorArrangement,
+        [1, 1, 1, 1, 1]
+      );
+    }
     return this;
   }
   checkForRowOfFour() {
-    this.colorArrangement = universalCheck(this.colorArrangement, [1, 1, 1, 1]);
+    if (this.allTheCandiesFell) {
+      this.colorArrangement = universalCheckCombination(
+        this.colorArrangement,
+        [1, 1, 1, 1]
+      );
+    }
     return this;
   }
 
   checkForRowOfThree() {
-    this.colorArrangement = universalCheck(this.colorArrangement, [1, 1, 1]);
+    if (this.allTheCandiesFell) {
+      this.colorArrangement = universalCheckCombination(
+        this.colorArrangement,
+        [1, 1, 1]
+      );
+    }
     return this;
   }
 
   checkForSquare() {
-    this.colorArrangement = universalCheck(this.colorArrangement, [
-      [1, 1],
-      [1, 1],
-    ]);
+    if (this.allTheCandiesFell) {
+      this.colorArrangement = universalCheckCombination(this.colorArrangement, [
+        [1, 1],
+        [1, 1],
+      ]);
+    }
     return this;
   }
 
   checkForTwoByThreeV1() {
-    this.colorArrangement = universalCheck(this.colorArrangement, [
-      [1, 1],
-      [1, 0],
-      [1, 0],
-    ]);
+    if (this.allTheCandiesFell) {
+      this.colorArrangement = universalCheckCombination(this.colorArrangement, [
+        [1, 1],
+        [1, 0],
+        [1, 0],
+      ]);
+    }
     return this;
   }
 
   checkForTwoByThreeV2() {
-    this.colorArrangement = universalCheck(this.colorArrangement, [
-      [1, 1],
-      [0, 1],
-      [0, 1],
-    ]);
+    if (this.allTheCandiesFell) {
+      this.colorArrangement = universalCheckCombination(this.colorArrangement, [
+        [1, 1],
+        [0, 1],
+        [0, 1],
+      ]);
+    }
     return this;
   }
 
   checkForTwoByThreeV3() {
-    this.colorArrangement = universalCheck(this.colorArrangement, [
-      [1, 0],
-      [1, 0],
-      [1, 1],
-    ]);
+    if (this.allTheCandiesFell) {
+      this.colorArrangement = universalCheckCombination(this.colorArrangement, [
+        [1, 0],
+        [1, 0],
+        [1, 1],
+      ]);
+    }
     return this;
   }
 
   checkForTwoByThreeV4() {
-    this.colorArrangement = universalCheck(this.colorArrangement, [
-      [1, 1],
-      [1, 0],
-      [1, 0],
-    ]);
+    if (this.allTheCandiesFell) {
+      this.colorArrangement = universalCheckCombination(this.colorArrangement, [
+        [1, 1],
+        [1, 0],
+        [1, 0],
+      ]);
+    }
     return this;
   }
 
   checkForThreeByTwoV1() {
-    this.colorArrangement = universalCheck(this.colorArrangement, [
-      [1, 0, 0],
-      [1, 1, 1],
-    ]);
+    if (this.allTheCandiesFell) {
+      this.colorArrangement = universalCheckCombination(this.colorArrangement, [
+        [1, 0, 0],
+        [1, 1, 1],
+      ]);
+    }
     return this;
   }
 
   checkForThreeByTwoV2() {
-    this.colorArrangement = universalCheck(this.colorArrangement, [
-      [0, 0, 1],
-      [1, 1, 1],
-    ]);
+    if (this.allTheCandiesFell) {
+      this.colorArrangement = universalCheckCombination(this.colorArrangement, [
+        [0, 0, 1],
+        [1, 1, 1],
+      ]);
+    }
     return this;
   }
 
   checkForThreeByTwoV3() {
-    this.colorArrangement = universalCheck(this.colorArrangement, [
-      [1, 1, 1],
-      [1, 0, 0],
-    ]);
+    if (this.allTheCandiesFell) {
+      this.colorArrangement = universalCheckCombination(this.colorArrangement, [
+        [1, 1, 1],
+        [1, 0, 0],
+      ]);
+    }
     return this;
   }
 
   checkForThreeByTwoV4() {
-    this.colorArrangement = universalCheck(this.colorArrangement, [
-      [1, 1, 1],
-      [0, 0, 1],
-    ]);
+    if (this.allTheCandiesFell) {
+      this.colorArrangement = universalCheckCombination(this.colorArrangement, [
+        [1, 1, 1],
+        [0, 0, 1],
+      ]);
+    }
+    return this;
+  }
+
+  checkEmptyBellow() {
+    const { colorArrangement, allTheCandiesFell } = checkEmptyBellowFunction(
+      this.colorArrangement
+    );
+    this.colorArrangement = colorArrangement;
+    this.allTheCandiesFell = allTheCandiesFell;
     return this;
   }
 }

@@ -1,9 +1,9 @@
 import config from "../../config";
-import { TTile } from "../createBoard";
+import { TTile } from "../../types";
 
 const { fieldDimensions, candyColors } = config;
 
-export const universalCheck = (
+export const universalCheckCombination = (
   colorArrangement: TTile[],
   shape: number[] | number[][]
 ) => {

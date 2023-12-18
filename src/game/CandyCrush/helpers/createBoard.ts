@@ -1,17 +1,17 @@
 import config from "../config";
+import { TTile } from "../types";
+import getRandomCandy from "./getRandomCandy";
 
-export type TTile = {
-  id: number;
-  color: string;
-};
+const { fieldDimensions } = config;
 
 const createBoard = (): TTile[] => {
-  const { fieldDimensions, candyColors } = config;
   const randomColorArrangement = [];
   for (let i = 0; i < fieldDimensions * fieldDimensions; i++) {
     randomColorArrangement.push({
       id: i,
-      color: candyColors[Math.floor(Math.random() * candyColors.length)],
+      color: getRandomCandy(),
+      stroke: "black",
+      zIndex: 0,
     });
   }
   return randomColorArrangement;
