@@ -10,7 +10,7 @@ const createBoard = (): TTile[] => {
     randomColorArrangement.push({
       id: i,
       color: getRandomCandy(),
-      stroke: "black",
+      stroke: "transparent",
       zIndex: 0,
     });
   }

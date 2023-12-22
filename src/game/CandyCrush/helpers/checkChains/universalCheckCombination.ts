@@ -58,7 +58,7 @@ export const universalCheckCombination = (
       )
     ) {
       indexesToCheck.forEach(
-        (tileIndex) => (colorArrangementCopy[tileIndex].color = "gray")
+        (tileIndex) => (colorArrangementCopy[tileIndex].color = "transparent")
       );
     }
   });

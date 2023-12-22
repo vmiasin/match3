@@ -16,7 +16,7 @@ const getNeighbours = (id: number) => {
     neigbours.push({ id: id + 1, direction: "right" });
   }
 
-  if (id <= fieldDimensions * (fieldDimensions - 1)) {
+  if (id < fieldDimensions * (fieldDimensions - 1)) {
     neigbours.push({ id: id + fieldDimensions, direction: "down" });
   }
 

@@ -1,5 +1,4 @@
-import { TNeighbours, TPosition } from ".";
-import { TTile } from "../../types";
+import { TNeighbours, TPosition, TTile } from "../../types";
 import { Dispatch, SetStateAction } from "react";
 import { Layer } from "konva/lib/Layer";
 
@@ -7,6 +6,7 @@ export const onDragMove = (
   layer: Layer | null,
   id: number,
   neighbours: TNeighbours,
+  setSelectedNeighbourId: Dispatch<SetStateAction<number | undefined>>,
   dragStartPosition: TPosition,
   colorArrangement: TTile[],
   setColorArrangement: Dispatch<SetStateAction<TTile[]>>
@@ -35,6 +35,12 @@ export const onDragMove = (
       const selectedNeighbour = neighbours.find(
         (neighbour) => neighbour.direction === moveDirection
       );
+
+      if (selectedNeighbour) {
+        setSelectedNeighbourId(selectedNeighbour.id);
+      } else {
+        setSelectedNeighbourId(undefined);
+      }
 
       neighbours.forEach(({ id }) => {
         if (id !== selectedNeighbour?.id) {

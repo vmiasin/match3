@@ -5,8 +5,11 @@ import createBoard from "./helpers/createBoard";
 import getTilePosition from "./helpers/getTilePosition";
 import CheckForChains from "./helpers/checkChains";
 import { TTile } from "./types";
-import Moves from "./helpers/moves";
 import { type Layer as TLayer } from "konva/lib/Layer";
+import { onDragMove } from "./helpers/moves/onDragMove";
+import getNeighbours from "./helpers/moves/getNeighbours";
+import { onDragStart } from "./helpers/moves/onDragStart";
+import { onDragEnd } from "./helpers/moves/onDragEnd";
 
 const { fieldDimensions, candyDimensions, strokeWidth } = config;
 
@@ -23,7 +26,10 @@ const CandyCrush = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       // более мощная комбинация должна быть выше
-      const { colorArrangement } = new CheckForChains(currentColorArrangement)
+      const { colorArrangement } = new CheckForChains(
+        currentColorArrangement,
+        layerRef.current
+      )
         .checkEmptyBellow()
         .checkForColumnOfFive()
         .checkForRowOfFive()
@@ -41,7 +47,7 @@ const CandyCrush = () => {
         .checkForColumnOfThree()
         .checkForRowOfThree();
       setCurrentColorArrangement(colorArrangement);
-    }, 500);
+    }, 200);
     return () => clearInterval(timer);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -57,12 +63,6 @@ const CandyCrush = () => {
           {currentColorArrangement.map(({ id, color, stroke }) => {
             const { x, y } = getTilePosition(id);
 
-            const moves = new Moves(
-              id,
-              setCurrentColorArrangement,
-              layerRef.current
-            );
-
             return (
               <Rect
                 key={id}
@@ -75,15 +75,27 @@ const CandyCrush = () => {
                 stroke={stroke}
                 strokeWidth={strokeWidth}
                 draggable
-                onDragStart={() => moves.onDragStart()}
+                onDragStart={() => onDragStart(layerRef.current, id)}
                 onDragMove={() =>
-                  moves.onDragMove(
+                  onDragMove(
+                    layerRef.current,
+                    id,
+                    getNeighbours(id),
+                    setSelectedNeighbourId,
+                    getTilePosition(id),
                     currentColorArrangement,
-                    setSelectedNeighbourId
+                    setCurrentColorArrangement
                   )
                 }
                 onDragEnd={() =>
-                  moves.onDragEnd(currentColorArrangement, selectedNeighbourId)
+                  onDragEnd(
+                    layerRef.current,
+                    id,
+                    getNeighbours(id),
+                    selectedNeighbourId,
+                    currentColorArrangement,
+                    setCurrentColorArrangement
+                  )
                 }
                 zIndex={0}
               />
