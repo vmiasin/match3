@@ -17,6 +17,7 @@ const CandyCrush = () => {
   const [currentColorArrangement, setCurrentColorArrangement] = useState<
     TTile[]
   >(createBoard());
+  const [isCandiesFell, setIsCandiesFell] = useState<boolean>(false);
   const [selectedNeighbourId, setSelectedNeighbourId] = useState<
     number | undefined
   >(undefined);
@@ -26,7 +27,7 @@ const CandyCrush = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       // более мощная комбинация должна быть выше
-      const { colorArrangement } = new CheckForChains(
+      const { colorArrangement, allTheCandiesFell } = new CheckForChains(
         currentColorArrangement,
         layerRef.current
       )
@@ -34,19 +35,20 @@ const CandyCrush = () => {
         .checkForColumnOfFive()
         .checkForRowOfFive()
         .checkForSquare()
-        .checkForTwoByThreeV1() // ?
-        .checkForTwoByThreeV2() // ?
-        .checkForTwoByThreeV3() // ?
-        .checkForTwoByThreeV4() // ?
-        .checkForThreeByTwoV1() // ?
-        .checkForThreeByTwoV2() // ?
-        .checkForThreeByTwoV3() // ?
-        .checkForThreeByTwoV4() // ?
-        .checkForColumnOfFour() // ?
+        // .checkForTwoByThreeV1() // ?
+        // .checkForTwoByThreeV2() // ?
+        // .checkForTwoByThreeV3() // ?
+        // .checkForTwoByThreeV4() // ?
+        // .checkForThreeByTwoV1() // ?
+        // .checkForThreeByTwoV2() // ?
+        // .checkForThreeByTwoV3() // ?
+        // .checkForThreeByTwoV4() // ?
+        .checkForColumnOfFour()
         .checkForRowOfFour()
         .checkForColumnOfThree()
         .checkForRowOfThree();
       setCurrentColorArrangement(colorArrangement);
+      setIsCandiesFell(allTheCandiesFell);
     }, 200);
     return () => clearInterval(timer);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -74,7 +76,7 @@ const CandyCrush = () => {
                 fill={color}
                 stroke={stroke}
                 strokeWidth={strokeWidth}
-                draggable
+                draggable={isCandiesFell}
                 onDragStart={() => onDragStart(layerRef.current, id)}
                 onDragMove={() =>
                   onDragMove(
