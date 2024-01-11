@@ -2,6 +2,7 @@ export type TConfig = {
   board?: {
     cols?: number;
     rows?: number;
+    maxWidth?: "xs" | "sm" | "md" | "lg" | "xl" | "2xl";
   };
   tiles: {
     key: string;

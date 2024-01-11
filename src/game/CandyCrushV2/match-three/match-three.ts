@@ -5,6 +5,8 @@ export const Status = {
   COLLAPSING: "COLLAPSING",
 };
 
+console.log(R);
+
 /* 
 
 

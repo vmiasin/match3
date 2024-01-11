@@ -7,6 +7,7 @@ import { useMatchThree } from "../match-three/useMatchThree";
 import { GameBoardItem } from "./GameBoardItem";
 import { toPercent } from "../utility";
 import { TItem } from "../types";
+import { useGameStore } from "../match-three/state";
 
 const selectedVariants = {
   notSelected: {

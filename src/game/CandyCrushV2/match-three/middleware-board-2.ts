@@ -28,15 +28,11 @@ function* swapFlow() {
   console.log(index1, index2);
 
   if (isAdjacent(index1, index2)) {
-    console.log("adjacent");
     const previous = yield select(board);
-
-    console.log(previous);
 
     yield put(setBoard(swap(index1, index2, yield select(board))));
 
     if (isStable(yield select(board))) {
-      console.log("stable");
       yield delay(1000 / 2);
 
       yield put(setBoard(previous));

@@ -6,11 +6,13 @@ import { useMatchThree } from "../match-three/useMatchThree";
 import { GameBoardSlot } from "./GameBoardSlot";
 import { useSize } from "./useSize";
 import { useStylesCursor } from "./useStylesCursor";
+// import { useGameStore } from "../match-three/state";
 
 export const GameBoard = () => {
-  const matchThree = useMatchThree();
   const cursorClassName = useStylesCursor();
-  const { board, columnCount, rowCount } = matchThree;
+  const { board, columnCount, rowCount } = useMatchThree();
+
+  // const { board, columnCount, rowCount } = useGameStore();
 
   const ref = useRef<HTMLDivElement | null>(null);
   const [boardWidth] = useSize(ref);

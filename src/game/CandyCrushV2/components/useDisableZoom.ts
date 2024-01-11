@@ -1,14 +1,12 @@
-//SOURCE: https://stackoverflow.com/questions/56024398/disable-double-tap-zoom-resize-on-safari-ios12
-
 import { useEffect } from "react";
 
-export const useDisableZoom = (element) => {
+export const useDisableZoom = (element: Element) => {
   useEffect(() => {
     if (!element) {
       return;
     }
 
-    const handleClick = (event) => {
+    const handleClick = (event: Event) => {
       event.preventDefault();
       event.stopPropagation();
     };
