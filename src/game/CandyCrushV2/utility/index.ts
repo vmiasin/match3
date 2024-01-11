@@ -17,3 +17,5 @@ export const distance = R.pipe(
   R.sum,
   Math.sqrt
 );
+
+export const toPercent = (decimal: number) => `${decimal * 100}%`;

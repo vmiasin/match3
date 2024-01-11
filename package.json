@@ -10,8 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@material-ui/core": "^4.12.4",
     "@reduxjs/toolkit": "^1.4.0",
+    "classnames": "^2.5.1",
     "framer-motion": "^10.17.12",
     "gsap": "^3.10.4",
     "konva": "^9.2.3",

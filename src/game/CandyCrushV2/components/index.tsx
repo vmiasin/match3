@@ -1,13 +1,10 @@
 import { App } from "./App";
 import { ReduxProvider } from "./ReduxProvider";
-import { ThemeProvider } from "./ThemeProvider";
 
 export const Root = () => {
   return (
     <ReduxProvider>
-      <ThemeProvider>
-        <App />
-      </ThemeProvider>
+      <App />
     </ReduxProvider>
   );
 };

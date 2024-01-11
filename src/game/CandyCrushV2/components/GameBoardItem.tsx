@@ -4,29 +4,8 @@ import { ItemType } from "../match-three/board";
 import { useDisableZoom } from "./useDisableZoom";
 import { TItem } from "../types";
 
-// import redTile from "../sprites/red.png";
-// import yellowTile from "../sprites/yellow.png";
-// import blueTile from "../sprites/blue.png";
-// import greenTile from "../sprites/green.png";
-// import purpleTile from "../sprites/pink.png";
-
-// const tilesImages = {
-//   red: redTile,
-//   yellow: yellowTile,
-//   blue: blueTile,
-//   green: greenTile,
-//   purple: purpleTile,
-// };
-
 const DefaultItem = ({ item }: { item: TItem }) => (
-  <div
-    style={{
-      width: "100%",
-      height: "100%",
-    }}
-  >
-    <img src={item.image} alt="" />
-  </div>
+  <img src={item.image} alt="" className="w-full h-full object-contain" />
 );
 
 const RadiusBombItem = ({ item }: { item: TItem }) => (

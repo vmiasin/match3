@@ -13,7 +13,6 @@ export const ItemType = {
 };
 
 const createRandomItemType = () => {
-  console.log(R.values(ItemType), randomNth(R.values(ItemType)));
   return Math.random() <= 1 / 20 ? randomNth(R.values(ItemType)) : undefined;
 };
 

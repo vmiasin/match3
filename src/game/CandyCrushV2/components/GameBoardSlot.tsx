@@ -1,4 +1,3 @@
-import { Box } from "@material-ui/core";
 import { motion } from "framer-motion";
 import * as R from "ramda";
 import { useState } from "react";
@@ -6,8 +5,8 @@ import { Flipped } from "react-flip-toolkit";
 import { Status } from "../match-three";
 import { useMatchThree } from "../match-three/useMatchThree";
 import { GameBoardItem } from "./GameBoardItem";
-
-const toPercent = (decimal: number) => `${decimal * 100}%`;
+import { toPercent } from "../utility";
+import { TItem } from "../types";
 
 const selectedVariants = {
   notSelected: {
@@ -24,9 +23,21 @@ const selectedVariants = {
   },
 };
 
-export const GameBoardSlot = (props) => {
-  const { rowIndex, columnIndex, boardHeight, boardWidth, item } = props;
+type Props = {
+  rowIndex: number;
+  columnIndex: number;
+  boardHeight: number;
+  boardWidth: number;
+  item: TItem;
+};
 
+export const GameBoardSlot = ({
+  rowIndex,
+  columnIndex,
+  boardHeight,
+  boardWidth,
+  item,
+}: Props) => {
   const { grabbed, columnCount, rowCount, grab, drop, status } =
     useMatchThree();
   const isCollapsing = status === Status.COLLAPSING;
@@ -55,18 +66,20 @@ export const GameBoardSlot = (props) => {
     }
   };
 
-  const styles = {
-    position: "absolute",
-    top: toPercent(rowIndex / rowCount),
-    left: toPercent(columnIndex / columnCount),
-    width: boardWidth / columnCount,
-    height: boardHeight / rowCount,
-    zIndex: isGrabbed ? 2 : 1,
-  };
-
   return (
     <Flipped key={item.id} flipId={item.id}>
-      <Box style={styles} onMouseDown={handleGrab} onMouseEnter={handleDrop}>
+      <div
+        style={{
+          position: "absolute",
+          top: toPercent(rowIndex / rowCount),
+          left: toPercent(columnIndex / columnCount),
+          width: boardWidth / columnCount,
+          height: boardHeight / rowCount,
+          zIndex: isGrabbed ? 2 : 1,
+        }}
+        onMouseDown={handleGrab}
+        onMouseEnter={handleDrop}
+      >
         <motion.div
           onHoverStart={() => {
             setIsHovering(true);
@@ -81,7 +94,7 @@ export const GameBoardSlot = (props) => {
         >
           <GameBoardItem item={item} />
         </motion.div>
-      </Box>
+      </div>
     </Flipped>
   );
 };

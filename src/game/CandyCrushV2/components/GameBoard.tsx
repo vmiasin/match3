@@ -1,6 +1,6 @@
-import { Box } from "@material-ui/core";
 import { AnimatePresence } from "framer-motion";
 import { useRef } from "react";
+import cn from "classnames";
 import { Flipper } from "react-flip-toolkit";
 import { useMatchThree } from "../match-three/useMatchThree";
 import { GameBoardSlot } from "./GameBoardSlot";
@@ -12,19 +12,17 @@ export const GameBoard = () => {
   const cursorClassName = useStylesCursor();
   const { board, columnCount, rowCount } = matchThree;
 
-  const ref = useRef();
+  const ref = useRef<HTMLDivElement | null>(null);
   const [boardWidth] = useSize(ref);
   const boardHeight = (boardWidth / columnCount) * rowCount;
 
   const flipKey = JSON.stringify(board);
 
   return (
-    <Box
-      className={cursorClassName}
+    <div
       ref={ref}
-      width="100%"
-      height={boardHeight}
-      position="relative"
+      className={cn(cursorClassName, "w-full", "relative")}
+      style={{ height: boardHeight }}
     >
       <Flipper flipKey={flipKey}>
         <AnimatePresence>
@@ -44,6 +42,6 @@ export const GameBoard = () => {
           )}
         </AnimatePresence>
       </Flipper>
-    </Box>
+    </div>
   );
 };
