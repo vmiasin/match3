@@ -1,7 +1,7 @@
 import { Group } from "konva/lib/Group";
 import { Shape, ShapeConfig } from "konva/lib/Shape";
-import { TPosition } from "./moves";
 import Konva from "konva";
+import { TPosition } from "../types";
 
 const moveTileAnimation = (
   item: Group | Shape<ShapeConfig>,

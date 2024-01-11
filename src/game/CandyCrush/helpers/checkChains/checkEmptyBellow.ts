@@ -29,37 +29,9 @@ export const checkEmptyBellow = (
       layer &&
       layer.children
     ) {
-      // const tiles = layer.children;
-      // const currentTile = tiles.find((tile) => +tile.attrs.id === i);
-      // const belowPosition = getTilePosition(i + fieldDimensions);
-
-      // if (currentTile) {
-      //   const copy = Rect({
-      //     x: currentTile.getAttr("x"),
-      //     y: currentTile.getAttr("y"),
-      //     height: currentTile.getAttr("height"),
-      //     width: currentTile.getAttr("width"),
-      //     fill: currentTile.getAttr("fill"),
-      //     stroke: currentTile.getAttr("stroke"),
-      //     strokeWidth: currentTile.getAttr("strokeWidth"),
-      //   }) as Shape<ShapeConfig>;
-      //   tiles.push(copy);
-      // }
-
-      // const belowTile = tiles.find(
-      //   (tile) => +tile.attrs.id === i + fieldDimensions
-      // );
-      // const currentPosition = getTilePosition(i);
-
-      // if (currentTile)
-      //   moveTileAnimation(currentTile, belowPosition, 0.2, "Linear");
-
-      // setTimeout(() => {
       colorArrangementCopy[i + fieldDimensions].color =
         colorArrangementCopy[i].color;
       colorArrangementCopy[i].color = "transparent";
-      //   if (currentTile) moveTileAnimation(currentTile, currentPosition, 0);
-      // }, 200);
 
       allTheCandiesFell = false;
     }
