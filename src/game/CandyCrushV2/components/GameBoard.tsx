@@ -2,17 +2,17 @@ import { AnimatePresence } from "framer-motion";
 import { useRef } from "react";
 import cn from "classnames";
 import { Flipper } from "react-flip-toolkit";
-import { useMatchThree } from "../match-three/useMatchThree";
 import { GameBoardSlot } from "./GameBoardSlot";
 import { useSize } from "./useSize";
 import { useStylesCursor } from "./useStylesCursor";
-// import { useGameStore } from "../match-three/state";
+import { useGameStore } from "../match-three";
 
 export const GameBoard = () => {
   const cursorClassName = useStylesCursor();
-  const { board, columnCount, rowCount } = useMatchThree();
 
-  // const { board, columnCount, rowCount } = useGameStore();
+  const board = useGameStore((state) => state.board);
+  const columnCount = useGameStore((state) => state.columnCount);
+  const rowCount = useGameStore((state) => state.rowCount);
 
   const ref = useRef<HTMLDivElement | null>(null);
   const [boardWidth] = useSize(ref);
@@ -28,20 +28,21 @@ export const GameBoard = () => {
     >
       <Flipper flipKey={flipKey}>
         <AnimatePresence>
-          {board.map((column, columnIndex) =>
-            column.map((item, rowIndex) =>
-              item ? (
-                <GameBoardSlot
-                  key={item.id}
-                  rowIndex={rowIndex}
-                  columnIndex={columnIndex}
-                  item={item}
-                  boardHeight={boardHeight}
-                  boardWidth={boardWidth}
-                />
-              ) : null
-            )
-          )}
+          {board &&
+            board.map((column, columnIndex) =>
+              column.map((item, rowIndex) =>
+                item ? (
+                  <GameBoardSlot
+                    key={item.id}
+                    rowIndex={rowIndex}
+                    columnIndex={columnIndex}
+                    item={item}
+                    boardHeight={boardHeight}
+                    boardWidth={boardWidth}
+                  />
+                ) : null
+              )
+            )}
         </AnimatePresence>
       </Flipper>
     </div>

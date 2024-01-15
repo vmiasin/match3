@@ -27,6 +27,15 @@ export const createRandomItem = (): TItem => {
 export const createRandomBoard = (rowCount = 8, columnCount = 8) =>
   R.times(() => R.times(() => createRandomItem(), rowCount), columnCount);
 
+export const createRandomStableBoard = (rowCount = 8, columnCount = 8) => {
+  const newBoard = createRandomBoard(rowCount, columnCount);
+  while (!isStable(newBoard)) {
+    newBoard.length = 0;
+    newBoard.push(...createRandomBoard(rowCount, columnCount));
+  }
+  return newBoard;
+};
+
 const mergeColumns = R.zipWith((item1, item2) =>
   R.isNil(item1) || R.isNil(item2) ? null : item1
 );
@@ -182,14 +191,14 @@ clear board
 
 */
 
-export const clear = (board) =>
+export const clear = (board: TItem[][]) =>
   R.reduce(mergeBoards, board, [
     clearMatchings(board),
     clearRadiusBombs(board),
     clearColorBombs(board),
     clearColumnLineBombs(board),
     clearRowLineBombs(board),
-  ]);
+  ]) as TItem[][];
 
 /* 
 
@@ -217,11 +226,12 @@ export const isStable = R.converge(R.equals, [R.identity, clear]);
 
 */
 
-export const swap = R.curry((index1, index2, board) =>
-  R.pipe(
-    R.assocPath(index1, R.path(index2, board)),
-    R.assocPath(index2, R.path(index1, board))
-  )(board)
+export const swap = R.curry(
+  (index1, index2, board) =>
+    R.pipe(
+      R.assocPath(index1, R.path(index2, board)),
+      R.assocPath(index2, R.path(index1, board))
+    )(board) as TItem[][]
 );
 
 /* 

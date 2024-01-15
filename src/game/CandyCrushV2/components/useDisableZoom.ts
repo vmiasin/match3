@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-export const useDisableZoom = (element: Element) => {
+export const useDisableZoom = (element: Element | null) => {
   useEffect(() => {
     if (!element) {
       return;

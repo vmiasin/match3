@@ -1,13 +1,8 @@
-import { Status } from "../match-three";
-import { useGameStore } from "../match-three/state";
-import { useMatchThree } from "../match-three/useMatchThree";
+import { useGameStore } from "../match-three";
 
 export const useStylesCursor = () => {
-  const { status, grabbed } = useMatchThree();
-  const isCollapsing = status === Status.COLLAPSING;
-  const isGrabbed = Boolean(grabbed);
-
-  // const { isCollapsing, isGrabbed } = useGameStore();
+  const isCollapsing = useGameStore((state) => state.isCollapsing);
+  const isGrabbed = !!useGameStore((state) => state.grab);
 
   if (isCollapsing) {
     return "cursor-wait";

@@ -2,12 +2,10 @@ import { motion } from "framer-motion";
 import * as R from "ramda";
 import { useState } from "react";
 import { Flipped } from "react-flip-toolkit";
-import { Status } from "../match-three";
-import { useMatchThree } from "../match-three/useMatchThree";
 import { GameBoardItem } from "./GameBoardItem";
 import { toPercent } from "../utility";
 import { TItem } from "../types";
-import { useGameStore } from "../match-three/state";
+import { useGameStore } from "../match-three";
 
 const selectedVariants = {
   notSelected: {
@@ -39,10 +37,14 @@ export const GameBoardSlot = ({
   boardWidth,
   item,
 }: Props) => {
-  const { grabbed, columnCount, rowCount, grab, drop, status } =
-    useMatchThree();
-  const isCollapsing = status === Status.COLLAPSING;
-  const isGrabbed = R.equals(grabbed, [columnIndex, rowIndex]);
+  const columnCount = useGameStore((state) => state.columnCount);
+  const rowCount = useGameStore((state) => state.rowCount);
+  const grab = useGameStore((state) => state.grab);
+  const isCollapsing = useGameStore((state) => state.isCollapsing);
+  const updateGrab = useGameStore((state) => state.updateGrab);
+  const updateDrop = useGameStore((state) => state.updateDrop);
+
+  const isGrabbed = R.equals(grab, [columnIndex, rowIndex]);
   const [isHovering, setIsHovering] = useState(false);
 
   const variant = isCollapsing
@@ -54,16 +56,18 @@ export const GameBoardSlot = ({
     : "notSelected";
 
   const handleGrab = () => {
-    if (isGrabbed) {
-      drop([columnIndex, rowIndex]);
-    } else {
-      grab([columnIndex, rowIndex]);
+    if (!isCollapsing) {
+      if (isGrabbed) {
+        updateDrop([columnIndex, rowIndex]);
+      } else {
+        updateGrab([columnIndex, rowIndex]);
+      }
     }
   };
 
   const handleDrop = () => {
-    if (grabbed) {
-      drop([columnIndex, rowIndex]);
+    if (grab) {
+      updateDrop([columnIndex, rowIndex]);
     }
   };
 
