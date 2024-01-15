@@ -1,11 +1,10 @@
 import { motion } from "framer-motion";
 import { useRef } from "react";
 import { ItemType } from "../match-three/board";
-import { useDisableZoom } from "./useDisableZoom";
 import { TItem } from "../types";
 
 const DefaultItem = ({ item }: { item: TItem }) => (
-  <img src={item.image} alt="" className="w-full h-full object-contain" />
+  <img src={item?.image} alt="" className="w-full h-full object-contain" />
 );
 
 const RadiusBombItem = ({ item }: { item: TItem }) => (
@@ -14,7 +13,7 @@ const RadiusBombItem = ({ item }: { item: TItem }) => (
       width: "100%",
       height: "100%",
       borderRadius: "50%",
-      background: item.color,
+      background: item?.color,
     }}
   />
 );
@@ -26,7 +25,7 @@ const ColorBombItem = ({ item }: { item: TItem }) => (
       height: "100%",
       background: "transparent",
       borderRadius: "50%",
-      border: `10px solid ${item.color}`,
+      border: `10px solid ${item?.color}`,
     }}
   />
 );
@@ -38,13 +37,13 @@ const LineBombItem = ({ item }: { item: TItem }) => (
       width: "100%",
       height: "100%",
       background: "transparent",
-      border: `10px solid ${item.color}`,
+      border: `10px solid ${item?.color}`,
     }}
   />
 );
 
 export const Item = ({ item }: { item: TItem }) => {
-  switch (item.type) {
+  switch (item?.type) {
     case ItemType.LineBomb:
       return <LineBombItem item={item} />;
     case ItemType.RadiusBomb:
@@ -58,8 +57,6 @@ export const Item = ({ item }: { item: TItem }) => {
 
 export const GameBoardItem = ({ item }: { item: TItem }) => {
   const ref = useRef<HTMLDivElement | null>(null);
-
-  useDisableZoom(ref.current);
 
   return (
     <motion.div

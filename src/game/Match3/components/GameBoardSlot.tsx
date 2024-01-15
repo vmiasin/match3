@@ -72,7 +72,7 @@ export const GameBoardSlot = ({
   };
 
   return (
-    <Flipped key={item.id} flipId={item.id}>
+    <Flipped key={item?.id} flipId={item?.id}>
       <div
         style={{
           position: "absolute",
