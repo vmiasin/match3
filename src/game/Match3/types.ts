@@ -4,6 +4,7 @@ export type TConfig = {
     rows?: number;
     maxWidth?: "xs" | "sm" | "md" | "lg" | "xl" | "2xl";
   };
+  bonusChance?: number;
   tiles: {
     key: string;
     image: string;
@@ -17,4 +18,4 @@ export type TItem = {
   key: string;
   color: string;
   image: string;
-};
+} | null;

@@ -11,6 +11,7 @@ export const Config: TConfig = {
     cols: 7,
     rows: 7,
   },
+  bonusChance: 1 / 20,
   tiles: [
     {
       key: "red",

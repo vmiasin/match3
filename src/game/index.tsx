@@ -1,9 +1,3 @@
-// import CandyCrush from "./CandyCrush";
-import CandyCrushV2 from "./CandyCrushV2";
+import Match3 from "./Match3";
 
-function Game() {
-  // return <CandyCrush />;
-  return <CandyCrushV2 />;
-}
-
-export default Game;
+export default Match3;
